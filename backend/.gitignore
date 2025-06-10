@@ -1,0 +1,23 @@
+# Node.js dependencies
+node_modules/
+
+# Environment files
+.env
+
+# SQLite Database file (caso não queira subir o banco no GitHub)
+database/database.sqlite
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS/System files
+.DS_Store
+Thumbs.db
+
+# Optional: VSCode settings
+.vscode/
+
+# Coverage reports (caso use testes no futuro)
+coverage/
