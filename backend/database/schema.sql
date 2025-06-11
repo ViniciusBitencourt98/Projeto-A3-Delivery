@@ -17,9 +17,6 @@ CREATE TABLE IF NOT EXISTS enderecos (
     numero VARCHAR(10),
     complemento VARCHAR(100),
     bairro VARCHAR(100),
-    cidade VARCHAR(100) NOT NULL,
-    estado VARCHAR(2) NOT NULL,
-    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Clientes
@@ -27,7 +24,7 @@ CREATE TABLE IF NOT EXISTS clientes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     usuario_id INTEGER NOT NULL UNIQUE,
     nome VARCHAR(100) NOT NULL,
-    telefone VARCHAR(20),
+    telefone VARCHAR(20), 
     endereco_id INTEGER,
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
     FOREIGN KEY (endereco_id) REFERENCES enderecos(id)
@@ -38,8 +35,7 @@ CREATE TABLE IF NOT EXISTS restaurantes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     usuario_id INTEGER NOT NULL UNIQUE,
     nome_fantasia VARCHAR(100) NOT NULL,
-    cnpj VARCHAR(18) UNIQUE,
-    descricao TEXT,
+    preco_frete DECIMAL(10,2) NOT NULL,
     foto_url TEXT,
     endereco_id INTEGER,
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
@@ -54,7 +50,6 @@ CREATE TABLE IF NOT EXISTS produtos (
     descricao TEXT,
     preco DECIMAL(10, 2) NOT NULL,
     foto_url TEXT,
-    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (restaurante_id) REFERENCES restaurantes(id)
 );
 
