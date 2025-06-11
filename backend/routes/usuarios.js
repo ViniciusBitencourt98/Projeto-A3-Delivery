@@ -3,10 +3,8 @@ const router = express.Router();
 const UsuariosController = require('../controllers/usuarioController');
 
 
-// Rota para criar um usuário
-router.post('/', UsuariosController.CriarUsuario);
-
-// Rota para listar usuários
-router.get('/', UsuariosController.ListarUsuario);
+router.post('/', UsuariosController.CriarUsuario);        // POST /api/v1/usuarios
+router.get('/:id', UsuariosController.ListarUsuarioPorId); // GET /api/v1/usuarios/:id
+router.put('/:id', UsuariosController.AtualizarUsuario);   // PUT /api/v1/usuarios/:id
 
 module.exports = router;

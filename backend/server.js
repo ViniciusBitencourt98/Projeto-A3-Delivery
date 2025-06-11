@@ -11,7 +11,11 @@ app.use(express.json());
 
 //Rotas de usuários, criar , alterar e listar usuários
 const usuariosRotas = require('./routes/usuarios');
-app.use('/usuarios', usuariosRotas);
+app.use('/api/v1/usuarios', usuariosRotas);
+
+// Rotas de autenticação, login e logout
+const autenticacaoRotas = require('./routes/autenticacao');
+app.use('/api/v1/auth', autenticacaoRotas);
 
 
 
