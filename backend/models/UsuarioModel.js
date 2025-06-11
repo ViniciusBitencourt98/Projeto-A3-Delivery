@@ -9,7 +9,10 @@ const UsuarioModel = {
     },
 
     listarUsuarioPorId: (id, callback) => {
-        const sql = `SELECT id, email, tipo_perfil, data_criacao, nome FROM usuarios WHERE id = ?`;
+        const sql = `SELECT * FROM usuarios u  
+        LEFT JOIN clientes c ON c.usuario_id = u.id
+        LEFT JOIN restaurantes r ON r.usuario_id = u.id
+        WHERE u.id = ?`;
         db.get(sql, [id], (err, row) => {
             callback(err, row);
         });

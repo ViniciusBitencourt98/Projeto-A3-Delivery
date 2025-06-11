@@ -1,4 +1,4 @@
-const AutenticacaoModel = require('../models/Autenticacao');
+const AutenticacaoModel = require('../models/AutenticacaoModel');
 
 
 const autenticacaoController = {

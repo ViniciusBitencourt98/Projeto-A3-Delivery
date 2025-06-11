@@ -10,14 +10,21 @@ app.use(express.json());
 
 
 //Rotas de usuários, criar , alterar e listar usuários
-const usuariosRotas = require('./routes/usuarios');
+const usuariosRotas = require('./routes/usuariosRotas');
 app.use('/api/v1/usuarios', usuariosRotas);
 
 // Rotas de autenticação, login e logout
-const autenticacaoRotas = require('./routes/autenticacao');
+const autenticacaoRotas = require('./routes/autenticacaoRotas');
 app.use('/api/v1/auth', autenticacaoRotas);
 
+// Rotas para carregar a home do cliente e restaurante
+const homeRotas = require('./routes/homeRotas');
+app.use('/api/v1/home', homeRotas);
 
+
+// Rotas de itens, mostra os pedidos do cliente e produtos do restaurantes
+const itensRotas = require('./routes/itensRotas');
+app.use('/api/v1/itens', itensRotas);
 
 
 app.listen(PORT, () => {
