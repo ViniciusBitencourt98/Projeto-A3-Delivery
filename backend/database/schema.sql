@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS enderecos (
     logradouro VARCHAR(100) NOT NULL,
     numero VARCHAR(10),
     complemento VARCHAR(100),
-    bairro VARCHAR(100),
+    bairro VARCHAR(100)
 );
 
 -- Clientes

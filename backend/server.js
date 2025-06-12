@@ -26,6 +26,10 @@ app.use('/api/v1/home', homeRotas);
 const itensRotas = require('./routes/itensRotas');
 app.use('/api/v1/itens', itensRotas);
 
+//Rota de pedidos, utilizado para criar, mudar statuus e avaliar pedidos
+const pedidosRotas = require('./routes/pedidosRotas');
+app.use('/api/v1/pedidos', pedidosRotas);
+
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
