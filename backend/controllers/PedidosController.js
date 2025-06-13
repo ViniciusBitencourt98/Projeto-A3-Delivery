@@ -2,16 +2,21 @@
 
 
 const PedidosController = {
-    // Método para criar um usuário
-    criar: async (req, res) => {
+    
+    Criar: async (req, res) => {
         res.send('Rota pedidos criar funcionando!');
     },
 
-    status: async (req, res) => {
+    Listar: async (req, res) => {
+        
+        res.send(`Rota pedidos listar funcionando! ID do cliente`);
+    },
+
+    Status: async (req, res) => {
         res.send('Rota pedidos status funcionando!');
     },
 
-    avaliar: async (req, res) => {
+    Avaliar: async (req, res) => {
         res.send('Rota pedidos avaliar funcionando!');
     }
 };

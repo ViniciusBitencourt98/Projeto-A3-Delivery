@@ -10,10 +10,10 @@ INSERT INTO usuarios (email, senha_hash, tipo_perfil) VALUES
 ('rest3@email.com', '$2a$10$GJ2MX1OPdHhLpz6MVO1MAehDT2Edfp/g6EyEq9qLkL0BBAmZ4OvG6', 'restaurante');
 
 -- Restaurantes de exemplo
-INSERT INTO restaurantes (usuario_id, nome_fantasia, cnpj, descricao, foto_url) VALUES 
-(1, 'Restaurante A', '00.000.000/0001-00', 'Delícias do A', 'foto1.jpg'),
-(2, 'Restaurante B', '11.111.111/0001-11', 'Sabor do B', 'foto2.jpg'),
-(3, 'Restaurante C', '22.222.222/0001-22', 'Especialidades C', 'foto3.jpg');
+INSERT INTO restaurantes (usuario_id, nome_fantasia, foto_url, preco_frete) VALUES 
+(1, 'Restaurante A', 'foto1.jpg', 9.99),
+(2, 'Restaurante B', 'foto2.jpg', 10.99),
+(3, 'Restaurante C', 'foto3.jpg', 7.99);
 
 -- Produtos de exemplo
 INSERT INTO produtos (restaurante_id, nome, descricao, preco, foto_url) VALUES

@@ -104,8 +104,6 @@ CREATE TABLE IF NOT EXISTS avaliacoes (
     usuario_id INTEGER NOT NULL,
     restaurante_id INTEGER NOT NULL,
     nota INTEGER NOT NULL CHECK (nota >= 1 AND nota <= 5),
-    comentario TEXT,
-    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
     FOREIGN KEY (restaurante_id) REFERENCES restaurantes(id)
 );

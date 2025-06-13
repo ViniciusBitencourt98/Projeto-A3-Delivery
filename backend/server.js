@@ -17,10 +17,6 @@ app.use('/api/v1/usuarios', usuariosRotas);
 const autenticacaoRotas = require('./routes/autenticacaoRotas');
 app.use('/api/v1/auth', autenticacaoRotas);
 
-// Rotas para carregar a home do cliente e restaurante
-const homeRotas = require('./routes/homeRotas');
-app.use('/api/v1/home', homeRotas);
-
 
 // Rotas de itens, mostra os pedidos do cliente e produtos do restaurantes
 const itensRotas = require('./routes/itensRotas');
