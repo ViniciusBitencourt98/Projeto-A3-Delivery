@@ -9,7 +9,7 @@ router.get('/listar', itensController.Listar);                              // G
 // Crud do restaurante, onde o dono do restaurante pode ler criar, alterar e deletar seus produtos
 
 //Lista os itens do restaurante
-router.get('/restaurante/listar/:id', itensController.ListarRestaurante);        // GET /api/v1/itens/restaurante/:id
+router.get('/restaurante/listar/:id', itensController.ListarRestaurante);        // GET /api/v1/itens/restaurante/listar/:id
 //Cria um iten do restaurante
 router.post('/restaurante', itensController.CriarItem);                    // POST /api/v1/itens/restaurante
 //Altera um iten do restaurante

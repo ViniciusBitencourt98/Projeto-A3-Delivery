@@ -101,11 +101,9 @@ CREATE TABLE IF NOT EXISTS pedido_categorias (
 -- Avaliações
 CREATE TABLE IF NOT EXISTS avaliacoes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    usuario_id INTEGER NOT NULL,
-    restaurante_id INTEGER NOT NULL,
+    pedido_id INTEGER NOT NULL,
     nota INTEGER NOT NULL CHECK (nota >= 1 AND nota <= 5),
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
-    FOREIGN KEY (restaurante_id) REFERENCES restaurantes(id)
+    FOREIGN KEY (pedido_id) REFERENCES pedidos(id)
 );
 
 -- Carrinho
