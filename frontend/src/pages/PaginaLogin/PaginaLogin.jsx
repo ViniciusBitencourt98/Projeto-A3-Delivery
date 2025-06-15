@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { Container, Form, Button, Modal } from 'react-bootstrap';
-import { ModalComponent, RegisterModal } from '../../components/modal/Modal.jsx';
+import ModalComponent from '../../components/modal/Modal.jsx';
 import './PaginaLogin.css';
-import InputComponent from '../../components//Input/Input.tsx';
-import LabelComponent from '../../components/label/Label.tsx';
+import InputComponent from '../../components//Input/Input.jsx';
+import LabelComponent from '../../components/label/Label.jsx';
+import FormsUser from '../../components/forms/FormsUser.jsx';
 
 export default function LoginPage({ onLogin }) {
-    const [showRegister, setShowRegister] = useState(false);
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const handleShow = () => setIsModalOpen(true);
+    const handleClose = () => setIsModalOpen(false);
 
     const [activeTab, setActiveTab] = useState('cliente');
 
@@ -79,12 +81,11 @@ export default function LoginPage({ onLogin }) {
                 <div></div>
             </div>
 
-            <div className='containet-register'><span onClick={() => setIsModalOpen(true)}>Registre-se</span></div>
-
+            <div className='containet-register'><span onClick={handleShow}>Registre-se</span></div>
 
             
-            <ModalComponent isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-                
+            <ModalComponent title='Novo usuário' show={isModalOpen} onHide={handleClose}>
+            <FormsUser/>
             </ModalComponent>
         </div>
 

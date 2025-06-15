@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
+
 import PaginaLogin from './pages/PaginaLogin/PaginaLogin';
-// import ClienteHome from './pages/ClienteHome';
-// import RestauranteHome from './pages/RestauranteHome';
 import Sidebar from './components/sidebar/Sidebar';
 
 function App() {

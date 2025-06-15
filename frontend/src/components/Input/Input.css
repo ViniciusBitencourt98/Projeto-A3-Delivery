@@ -1,10 +1,11 @@
 .InputStyle{
-    height: 25px;
+    height: 30px;
     border: 1.5px solid var(--borda-suave);
     outline: none;
     border-radius: 4px;
     box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.5);
     padding-left: 5px;
+    width: 100%;
 }
 .InputStyle::placeholder{
     font-family: var(--font-Inter);

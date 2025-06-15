@@ -1,0 +1,38 @@
+.btnCusttom{
+    height: 35px;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    font-family: var(--font-Inter);
+    font-size: 14px;
+    font-weight: 400;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 120px;
+}
+.btnCusttom:hover{
+    cursor: pointer;
+}
+.btnCusttom img{
+    width: 20px;
+    height: 20px;
+}
+.btnProx{
+    background: var(--primary);
+    color: var(--texto-claro);
+    border: 1px solid var(--primary);
+}
+.BtnBack{
+    background: var(--fundo-claro);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+}
+.BtnCancel{
+    background: var(--texto-claro);
+    color: var(--alerta);
+    border: 1px solid var(--alerta);
+}
