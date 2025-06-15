@@ -1,0 +1,7 @@
+.labelstyle{
+    font-family: var(--font-Inter);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--texto-primarioo);
+    margin-bottom: 7px;
+}

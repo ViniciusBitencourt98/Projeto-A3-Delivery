@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+:root {
+  --font-Inter: 'Inter';
+  --font-Montserrat: 'Montserrat';
+  --primary: #FF6B00;
+  --primary-hover: #FF7F1A;
+  --primary-ativo: #CC5500;
+  --secundaria: #FFA300;
+  --complementar: #007BFF;
+  --alerta:#FF0033;
+  --fundo-claro: #FFF8F2;
+  --fundo-card: #FFFFFF;
+  --fundo-escuro: #121212;
+  --texto-primario: #1A1A1A;
+  --texto-secundario: #555555;
+  --texto-claro: #FFFFFF;
+  --sucesso: #27AE60;
+  --aviso: #F1C40F;
+  --erro: #E74C3C;
+  --borda-suave: #E0E0E0;
+}
+
+
