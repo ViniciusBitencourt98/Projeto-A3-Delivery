@@ -1,0 +1,28 @@
+.BtnNavBar{
+    height: 28px;
+    width: 28px;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    justify-content: center !important;
+    align-items: center;
+    background: var(--fundo-claro);
+    padding: 0;
+    position: relative;
+    left: 58px; /*226px; */
+    transition: left 0.3s ease;
+}
+.BtnNavBar img{
+    color: red;
+}
+.sidebarstyle{
+    border-right: 1px solid var(--primary);
+    border-radius: 0 14px 14px 0;
+}
+.LabelNavbar{
+    font-family: var(--font-Inter) !important;
+    font-size: 16px !important;
+    font-weight: 500;
+    color: var(--texto-primario) !important;
+    margin-left: 15px;
+}

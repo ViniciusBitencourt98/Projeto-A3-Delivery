@@ -19,7 +19,7 @@ const UsuariosController = {
             db.run("BEGIN TRANSACTION", (err) => {
                 if (err) return res.status(500).json({ error: 'Erro ao iniciar transação.' });
 
-                UsuarioModel.criarUsuario(email, senhaHashGerada, tipo_perfil, (err, usuarioId) => {
+                UsuarioModel.criarUsuario(email, senhaHashGerada, tipo_perfil, (err, usuarioId, email, senha_hash) => {
                     if (err) {
                         db.run("ROLLBACK");
                         if (err.message.includes('UNIQUE constraint failed')) {
@@ -49,7 +49,8 @@ const UsuariosController = {
                                     usuarioId,
                                     enderecoId,
                                     perfilId,
-                                    tipo_perfil
+                                    tipo_perfil,
+                                    email, senha_hash
                                 });
                             });
                         };

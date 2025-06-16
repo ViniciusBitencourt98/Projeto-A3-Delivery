@@ -4,7 +4,7 @@ const UsuarioModel = {
     criarUsuario: (email, senha_hash, tipo_perfil, callback) => {
         const sql = `INSERT INTO usuarios (email, senha_hash, tipo_perfil) VALUES (?, ?, ?)`;
         db.run(sql, [email, senha_hash, tipo_perfil], function (err) {
-            callback(err, this?.lastID);
+            callback(err, this?.lastID, email, senha_hash);
         });
     },
 

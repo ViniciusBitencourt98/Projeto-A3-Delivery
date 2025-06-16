@@ -30,7 +30,8 @@ const autenticacaoController = {
 
                 res.status(200).json({
                     message: 'Login realizado com sucesso!',
-                    token
+                    token,
+                    usuario
                 });
             });
         } catch (error) {

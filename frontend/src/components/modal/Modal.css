@@ -13,6 +13,17 @@
   font-size: 20px;
 }
 .custom-modal .modal-dialog {
-  width: 1200px !important;  /* força a largura */
-  max-width: none !important; /* remove limite padrão do bootstrap */
+  width: 1200px !important;  
+  max-width: none !important; 
+}
+
+
+.modal-sucesso .modal-content {
+  border: 3px solid var(--sucesso);
+  background-color: #e9f9f1; 
+}
+
+.modal-saida .modal-content {
+  border: 3px solid var(--erro);
+  background-color: #fbeaea; 
 }

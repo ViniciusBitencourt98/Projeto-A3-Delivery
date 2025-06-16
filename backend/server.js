@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const db = require('./database/init'); // executa a criação e populamento do DB
-const PORT = 3000;
+const PORT = 3001;
 
 
 app.use(cors());

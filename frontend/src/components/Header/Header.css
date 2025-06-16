@@ -1,0 +1,13 @@
+.HeaderComponent{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    padding-right: 30px;
+}
+.HeaderComponent h1{
+    font-family: var(--font-Montserrat);
+    font-size: 22px;
+    margin: 0;
+}

@@ -36,3 +36,9 @@
     color: var(--alerta);
     border: 1px solid var(--alerta);
 }
+.BtnRealizaLogin{
+    background: var(--primary);
+    color: var(--texto-claro);
+    border: 1px solid var(--primary);
+    width: 160px;
+}
