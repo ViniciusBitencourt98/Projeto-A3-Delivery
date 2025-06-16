@@ -1,0 +1,16 @@
+.TtilePage {
+    margin-top: 50px;
+    margin-left: 40px;
+    font-family: var(--font-Montserrat);
+    font-weight: 600;
+    font-size: 28px;
+}
+
+.ContainerPedidos {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding: 16px;
+    width: 90%;
+}

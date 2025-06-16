@@ -5,7 +5,7 @@ const PedidosController = require('../controllers/pedidosController');
 
 
 // Rota para listar os pedidos do cliente
-router.get('/cliente/listar/:id', PedidosController.Listar);          // GET /api/v1/pedidos/cliente/listar/:id
+router.post('/cliente/listar/:id', PedidosController.Listar);          // GET /api/v1/pedidos/cliente/listar/:id
 //Rota para crioar um pedido
 router.post('/cliente/', PedidosController.CriarPedido);                   // POST /api/v1/pedidos/cliente/
 //Rota para o cliente avaliar um pedido

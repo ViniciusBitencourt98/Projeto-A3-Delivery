@@ -1,0 +1,69 @@
+.CardContainer {
+    width: 260px;
+    background: #F1FAFD;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+}
+
+.ContainerTitleCard {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-top: 10px;
+    border-bottom: 4px solid var(--primary);
+}
+
+.TitleCard {
+    font-family: var(--font-Inter);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.ContainerValor {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+    margin-top: 20px;
+    height: 50px;
+}
+
+.SpanMoeda {
+    font-family: var(--font-Inter);
+    font-weight: 400;
+    font-size: 14px;
+    padding-top: 5px;
+}
+
+.Spanvalor {
+    font-family: var(--font-Inter);
+    font-weight: 600;
+    font-size: 26px;
+}
+.ConteinerItens{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+.TitleItens{
+    font-family: var(--font-Montserrat);
+    font-weight: 600;
+    color: #5E616F;
+    font-size: 18px;
+}
+.LinhaIten{
+    margin-top: 10px;
+    font-family: var(--font-Inter);
+    font-size: 16px;
+    font-weight: 500;
+}
+.ContainerAction{
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px 0 20px 0;
+}

@@ -61,7 +61,7 @@ const PedidosController = {
         const id = req.params.id;
         const { status } = req.body;
 
-        
+
         const statusPermitidos = ['pendente', 'confirmado', 'preparando', 'entregue', 'cancelado'];
         if (!status || !statusPermitidos.includes(status.toLowerCase())) {
             return res.status(400).json({ error: 'Status inválido ou não informado.' });

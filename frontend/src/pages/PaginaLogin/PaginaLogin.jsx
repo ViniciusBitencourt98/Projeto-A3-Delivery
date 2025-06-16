@@ -40,6 +40,8 @@ export default function LoginPage({ onLogin }) {
                 perfil: data.usuario.tipo_perfil,
                 email: data.usuario.email,
                 token: data.token,
+                id: data.usuario.id,
+                Nome: data.row.nome
             });
 
             if (data.tipo_perfil === 'cliente') {

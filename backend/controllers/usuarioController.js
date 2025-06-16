@@ -84,7 +84,7 @@ const UsuariosController = {
         });
     },
 
-    AtualizarUsuario: async (req, res) => { // Tornar async
+    AtualizarUsuario: async (req, res) => { 
         const { id } = req.params;
         let { email, senha_hash, endereco, perfilData } = req.body;
 

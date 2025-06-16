@@ -31,11 +31,18 @@ const PedidosModel = {
 
     ListarPedidosPorFiltro: (campo, valor, callback) => {
         const sql = `
-        SELECT * FROM pedidos
-        LEFT JOIN pedido_itens ON pedido_itens.pedido_id = pedidos.id
+        SELECT 
+            pedidos.id as pedido_id,
+            pedidos.status,
+            SUM(pedido_itens.quantidade * pedido_itens.preco_unitario) AS valor_total,
+            GROUP_CONCAT(produtos.nome, ', ') AS itens_nome
+        FROM pedidos
+        JOIN pedido_itens ON pedido_itens.pedido_id = pedidos.id
+        JOIN produtos ON produtos.id = pedido_itens.produto_id
         LEFT JOIN modos_pagamento ON modos_pagamento.id = pedidos.modo_pagamento_id
         WHERE ${campo} = ?
-    `;
+        GROUP BY pedidos.id
+        ORDER BY pedidos.criado_em DESC`;
 
         db.all(sql, [valor], (err, results) => {
             if (err) {

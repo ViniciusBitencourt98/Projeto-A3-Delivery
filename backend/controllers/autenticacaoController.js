@@ -1,4 +1,5 @@
 const AutenticacaoModel = require('../models/AutenticacaoModel');
+const UsuarioModel = require('../models/UsuarioModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -28,11 +29,23 @@ const autenticacaoController = {
                     { expiresIn: '1h' }
                 );
 
-                res.status(200).json({
+                
+                
+                UsuarioModel.listarUsuarioPorId(usuario.id, async(err, row) => {
+                    if (err) return res.status(500).json({ error: 'Erro ao buscar usuário.' });
+                    if (!row) return res.status(404).json({ error: 'Usuário não encontrado.' });
+                    
+                    res.status(200).json({
                     message: 'Login realizado com sucesso!',
                     token,
-                    usuario
+                    usuario,
+                    row,
                 });
+                    
+                });
+
+
+                
             });
         } catch (error) {
             console.error(error);

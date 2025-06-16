@@ -17,7 +17,7 @@ const ClienteHome = () => {
 
   return (
     <>
-      <HeaderComponent nome={user.email} perfil={user.perfil} />
+      <HeaderComponent nome={user.Nome} perfil={user.perfil} />
 
       <div className="Menuopcoes">
         <nav className="selecionado">Ofertas</nav>
