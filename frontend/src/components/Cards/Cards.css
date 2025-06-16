@@ -67,3 +67,9 @@
     margin: 0 auto;
     padding: 20px 0 20px 0;
 }
+.TagPendente{
+    padding: 8px;
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    font-family: var(--font-Inter);
+}

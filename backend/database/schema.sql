@@ -42,15 +42,24 @@ CREATE TABLE IF NOT EXISTS restaurantes (
     FOREIGN KEY (endereco_id) REFERENCES enderecos(id)
 );
 
+--Tipos de produto
+CREATE TABLE IF NOT EXISTS categorias_produto (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome VARCHAR(100) NOT NULL
+);
+
+
 -- Produtos
 CREATE TABLE IF NOT EXISTS produtos (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     restaurante_id INTEGER NOT NULL,
+    categoria_id INTEGER, 
     nome VARCHAR(100) NOT NULL,
     descricao TEXT,
     preco DECIMAL(10, 2) NOT NULL,
     foto_url TEXT,
-    FOREIGN KEY (restaurante_id) REFERENCES restaurantes(id)
+    FOREIGN KEY (restaurante_id) REFERENCES restaurantes(id),
+    FOREIGN KEY (categoria_id) REFERENCES categorias_produto(id)
 );
 
 -- Modos de pagamento
@@ -104,22 +113,4 @@ CREATE TABLE IF NOT EXISTS avaliacoes (
     pedido_id INTEGER NOT NULL,
     nota INTEGER NOT NULL CHECK (nota >= 1 AND nota <= 5),
     FOREIGN KEY (pedido_id) REFERENCES pedidos(id)
-);
-
--- Carrinho
-CREATE TABLE IF NOT EXISTS carrinho (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    usuario_id INTEGER NOT NULL,
-    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
-);
-
--- Itens do carrinho
-CREATE TABLE IF NOT EXISTS carrinho_itens (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    carrinho_id INTEGER NOT NULL,
-    produto_id INTEGER NOT NULL,
-    quantidade INTEGER NOT NULL,
-    FOREIGN KEY (carrinho_id) REFERENCES carrinho(id),
-    FOREIGN KEY (produto_id) REFERENCES produtos(id)
 );

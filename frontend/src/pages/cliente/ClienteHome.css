@@ -31,3 +31,28 @@
   padding: 16px;
   width: 90%;
 }
+.product-card{
+    width: 350px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+    padding: 15px 5px;
+}
+.product-card div{
+    width: 90%;
+}
+.img-placeholder{
+    display: flex;
+    flex-direction: column;
+}
+.info-card h4{
+    font-family: var(--font-Montserrat);
+    font-size: 18px;
+    font-weight: 600;
+}
+.info-card p{
+    font-family: var(--font-Inter);
+    font-size: 12px;
+    font-weight: 400;
+}

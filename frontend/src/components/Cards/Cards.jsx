@@ -1,6 +1,7 @@
 import './Cards.css';
 import { useUser } from '../../context/UserContext';
 import BtnAction from '../Buttons/BtnAction';
+import AvaliacaoComponent from '../Avaliacao/Avaliacao';
 
 export const CardsComponente = ({ pedido, onClick }) => {
   const { user } = useUser();
@@ -29,18 +30,26 @@ export const CardsComponente = ({ pedido, onClick }) => {
         ))}
       </div>
 
+      
       <div className='ContainerAction'>
         {user.perfil === 'cliente' ? (
           pedido.status === 'Entregue' ? (
-            // aqui você pode colocar um componente de avaliação ou botão
-            <span>Colocar componente de avaliação aqui</span>
+            <AvaliacaoComponent
+              pedidoId={pedido.pedido_id}
+              notaInicial={pedido.nota_avaliacao}
+            />
           ) : (
-            <span>Status: {pedido.status}</span>
+            <span
+              className={`TagStatus ${pedido.status === 'pendente' ? 'TagPendente' : 'TagOutro'}`}
+            >
+              {pedido.status}
+            </span>
           )
         ) : (
           <BtnAction onClick={() => onClick(pedido.pedido_id)} />
         )}
       </div>
+
     </div>
   );
 };

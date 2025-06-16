@@ -1,0 +1,16 @@
+.ContainerEstrelas{ 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.AreaEstrelas{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.ContainerEstrelas > span{
+    font-family: var(--font-Inter);
+    font-size: 18px;
+}

@@ -1,49 +1,80 @@
+import { useState, useEffect } from 'react';
 import { useUser } from '../../context/UserContext';
 import HeaderComponent from '../../components/Header/Header';
 import './ClienteHome.css';
 
-//Dados mockados
-const produtos = [
-  { id: 1, nome: 'Pizza', descricao: 'Deliciosa pizza de mussarela', preco: 19.99, imagem: '/images/pizza.jpg' },
-  { id: 2, nome: 'Hambúrguer', descricao: 'Hambúrguer suculento', preco: 15.50, imagem: '/images/burger.jpg' },
-  { id: 3, nome: 'Sushi', descricao: 'Sushi fresco', preco: 25.00, imagem: '/images/sushi.jpg' },
-  { id: 4, nome: 'Sushi', descricao: 'Sushi fresco', preco: 25.00, imagem: '/images/sushi.jpg' },
-  { id: 5, nome: 'Sushi', descricao: 'Sushi fresco', preco: 25.00, imagem: '/images/sushi.jpg' }
-];
-
-
 const ClienteHome = () => {
   const { user } = useUser();
+  const [produtos, setProdutos] = useState([]);
+  const [categorias, setCategorias] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [erro, setErro] = useState(null);
+  const [categoriaSelecionada, setCategoriaSelecionada] = useState('Ofertas');
+
+  useEffect(() => {
+    const buscarProdutos = async () => {
+      try {
+        const res = await fetch('http://localhost:3001/api/v1/itens/listar');
+        if (!res.ok) throw new Error('Erro ao buscar produtos');
+        const data = await res.json();
+
+        setProdutos(data);
+
+        // Gera lista de categorias únicas a partir dos produtos
+        const categoriasUnicas = ['Ofertas', ...new Set(data.map(item => item.categoria_nome))];
+        setCategorias(categoriasUnicas);
+      } catch (err) {
+        console.error('Erro na requisição:', err);
+        setErro(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    buscarProdutos();
+  }, []);
+
+
+  const produtosFiltrados = categoriaSelecionada === 'Ofertas'
+    ? produtos
+    : produtos.filter(item => item.categoria_nome === categoriaSelecionada);
 
   return (
     <>
       <HeaderComponent nome={user.Nome} perfil={user.perfil} />
 
       <div className="Menuopcoes">
-        <nav className="selecionado">Ofertas</nav>
-        <nav>Pizza</nav>
-        <nav>Bebidas</nav>
-        <nav>Massas</nav>
-        <nav>Açaí e sorvete</nav>
+        {categorias.map((cat, index) => (
+          <nav
+            key={index}
+            className={categoriaSelecionada === cat ? 'selecionado' : ''}
+            onClick={() => setCategoriaSelecionada(cat)}
+          >
+            {cat}
+          </nav>
+        ))}
       </div>
 
+      {loading && <p>Carregando produtos...</p>}
+      {erro && <p>Erro: {erro}</p>}
+
       <div className="Cotainer-card">
-        {produtos.map(produto => (
+        {produtosFiltrados.map(produto => (
           <div className="product-card" key={produto.id}>
-            <div className="img-placeholder">
-              {produto.imagem ? (
-                <img src={produto.imagem} alt={produto.nome} />
-              ) : (
-                <div className="no-image">Sem imagem</div>
-              )}
-            </div>
-            <div className="info">
+            <div className="info-card">
               <h4>{produto.nome}</h4>
               <p>{produto.descricao}</p>
               <div className="price-add">
                 <strong>R$ {produto.preco.toFixed(2)}</strong>
-                <button className="add-btn">➕</button>
               </div>
+            </div>
+            <div className="img-placeholder">
+              {produto.foto_url ? (
+                <img src={`/images/${produto.foto_url}`} alt={produto.nome} />
+              ) : (
+                <div className="no-image">Sem imagem</div>
+              )}
+              <button className="add-btn">➕</button>
             </div>
           </div>
         ))}

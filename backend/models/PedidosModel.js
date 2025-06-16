@@ -35,11 +35,13 @@ const PedidosModel = {
             pedidos.id as pedido_id,
             pedidos.status,
             SUM(pedido_itens.quantidade * pedido_itens.preco_unitario) AS valor_total,
-            GROUP_CONCAT(produtos.nome, ', ') AS itens_nome
+            GROUP_CONCAT(produtos.nome, ', ') AS itens_nome,
+            avaliacoes.nota as nota_avaliacao -- traz a nota se já existir
         FROM pedidos
         JOIN pedido_itens ON pedido_itens.pedido_id = pedidos.id
         JOIN produtos ON produtos.id = pedido_itens.produto_id
         LEFT JOIN modos_pagamento ON modos_pagamento.id = pedidos.modo_pagamento_id
+        LEFT JOIN avaliacoes ON avaliacoes.pedido_id = pedidos.id -- traz avaliação
         WHERE ${campo} = ?
         GROUP BY pedidos.id
         ORDER BY pedidos.criado_em DESC`;
