@@ -5,7 +5,6 @@ import HeaderComponent from '../../components/Header/Header';
 import ModalComponent from '../../components/modal/Modal.jsx';
 import InputComponent from '../../components/Input/Input.jsx';
 import LabelComponent from '../../components/label/Label.jsx';
-import BtnConfirm from '../../components/Buttons/BtnConfirm.jsx';
 import './RestauranteCardapio.css';
 
 const RestauranteCardapio = () => {
@@ -84,10 +83,19 @@ const RestauranteCardapio = () => {
 
     const handleSalvar = async () => {
         try {
+
+            let categoria_id = null;
+            if (formData.nome.toLowerCase().includes('pizza')) {
+                categoria_id = 2;
+            } else if (formData.nome.toLowerCase().includes('hamburguer')) {
+                categoria_id = 1;
+            }
+
             const body = {
                 ...formData,
                 preco: parseFloat(formData.preco),
-                restaurante_id: user.id
+                restaurante_id: user.id,
+                categoria_id
             };
 
             let response;
@@ -225,8 +233,7 @@ const RestauranteCardapio = () => {
                     </Row>
                     <Row className="justify-content-center mt-3">
                         <Col xs={10} className="d-flex justify-content-end">
-                            <button type="submit" id="submitBtn" style={{ display: 'none' }}></button>
-                            <BtnConfirm onClick={() => document.getElementById('submitBtn').click()} />
+                            <button className="btnCustton btnProx" type="submit" id="submitBtn" style={{ display: '' }}>Finalizar<img src="/images/IconConfirm.svg" alt="" /></button>
                         </Col>
                     </Row>
                 </form>

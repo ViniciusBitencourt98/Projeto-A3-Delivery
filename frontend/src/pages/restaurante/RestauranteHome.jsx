@@ -24,7 +24,10 @@ const RestauranteHome = () => {
                     })
                 });
                 const data = await response.json();
-                setPedidos(data);
+                const pedidosArray = Array.isArray(data)
+                    ? data 
+                    : (data.data || []);
+                setPedidos(pedidosArray);
             } catch (error) {
                 console.error('Erro ao buscar pedidos:', error);
             } finally {

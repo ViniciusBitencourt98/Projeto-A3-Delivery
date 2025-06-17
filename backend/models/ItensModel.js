@@ -38,8 +38,8 @@ const ItensModel = {
     },
 
     CriarItem: (item, callback) => {
-        const sql = 'INSERT INTO produtos (nome, descricao, preco, restaurante_id, foto_url) VALUES (?, ?, ?, ?, ?)';
-        db.run(sql, [item.nome, item.descricao, item.preco, item.restaurante_id, item.foto_url], function (err) {
+        const sql = 'INSERT INTO produtos (nome, descricao, preco, restaurante_id, foto_url, categoria_id) VALUES (?, ?, ?, ?, ?, ?)';
+        db.run(sql, [item.nome, item.descricao, item.preco, item.restaurante_id, item.foto_url, item.categoria_id], function (err) {
             if (err) {
                 console.error('Erro ao criar item:', err);
                 return callback(err);

@@ -82,7 +82,8 @@ const ClienteHome = () => {
                   id: produto.id,
                   name: produto.nome,
                   price: produto.preco,
-                  details: produto.descricao
+                  details: produto.descricao,
+                  restaurant_id: produto.restaurante_id
                 })}
               >
                 <img src="/images/addbtn.svg" alt="" width={30} height={30} />
