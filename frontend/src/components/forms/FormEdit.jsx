@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Row, Col, Form } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Row, Col, Form, Toast, ToastContainer } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import styles from './FormsUser.css';
 import BtnProx from '../../components/Buttons/BtnProx.jsx';
 import BtnBack from '../../components/Buttons/BtnBack.jsx';
@@ -7,26 +8,23 @@ import LabelComponent from '../../components/label/Label.jsx';
 import InputComponent from '../../components/Input/Input.jsx';
 import BtnConfirm from '../../components/Buttons/BtnConfirm.jsx';
 import BtnCancel from '../../components/Buttons/BtnCancel.jsx';
-import { Toast, ToastContainer } from 'react-bootstrap';
+import { useUser } from '../../context/UserContext';
 
-const FormsUser = ({ onCadastroSuccess }) => {
+const FormEdit = ({ onCadastroSuccess }) => {
+  const { user } = useUser(); 
+  const navigate = useNavigate();
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [toastVariant, setToastVariant] = useState('');
 
-
   const [step, setStep] = useState(1);
   const [perfil, setPerfil] = useState('');
   const [formData, setFormData] = useState({
-    // Comuns (cliente e restaurante)
     nome: '',
     telefone: '',
     senha: '',
     email: '',
-    // Restaurante
     nomeRestaurante: '',
-    frete: '',
-    // Endereço
     cep: '',
     logradouro: '',
     numero: '',
@@ -34,13 +32,44 @@ const FormsUser = ({ onCadastroSuccess }) => {
     bairro: ''
   });
 
-  const handleSubmit = async () => {
 
+  useEffect(() => {
+    if (!user?.id) return;
+
+    fetch(`http://localhost:3001/api/v1/usuarios/${user.id}`)
+      .then(res => {
+        if (!res.ok) throw new Error('Erro ao buscar dados do usuário');
+        return res.json();
+      })
+      .then(data => {
+        setPerfil(data.tipo_perfil || '');
+
+        setFormData({
+          nome: data.tipo_perfil === 'cliente' ? data.nome || '' : '',
+          nomeRestaurante: data.tipo_perfil === 'restaurante' ? data.nome_fantasia || '' : '',
+          telefone: data.telefone || '',
+          senha: '', // senha não deve ser preenchida
+          email: data.email || '',
+          cep: data.cep || '',
+          logradouro: data.logradouro || '',
+          numero: data.numero || '',
+          complemento: data.complemento || '',
+          bairro: data.bairro || '',
+          frete: data.preco_frete ||''
+        });
+      })
+      .catch(() => {
+        setToastMessage('Erro ao carregar dados do usuário.');
+        setToastVariant('danger');
+        setShowToast(true);
+      });
+  }, [user]);
+
+  const handleSubmit = async () => {
     if (!validateStep(step)) {
-      alert('para finalizar o cadastro, preencha todos os campos.');
+      alert('Para finalizar o cadastro, preencha todos os campos.');
       return;
     }
-
 
     const payload = {
       email: formData.email,
@@ -65,8 +94,8 @@ const FormsUser = ({ onCadastroSuccess }) => {
     };
 
     try {
-      const response = await fetch('http://localhost:3001/api/v1/usuarios', {
-        method: 'POST',
+      const response = await fetch(`http://localhost:3001/api/v1/usuarios/${user.id}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -74,20 +103,27 @@ const FormsUser = ({ onCadastroSuccess }) => {
       });
 
       if (!response.ok) {
-        throw new Error('Erro ao cadastrar usuário');
+        throw new Error('Erro ao atualizar usuário');
       }
 
       const data = await response.json();
 
-      onCadastroSuccess(formData.email, formData.senha);
+      setToastMessage('Usuário atualizado com sucesso!');
+      setToastVariant('success');
+      setShowToast(true);
+      const storedUser = JSON.parse(localStorage.getItem('user')) || {};
+      storedUser.Nome = formData.nome || formData.nomeRestaurante;
+      localStorage.setItem('user', JSON.stringify(storedUser));
+      navigate('/cliente');
+      window.location.reload();
 
+      onCadastroSuccess && onCadastroSuccess(formData.email, formData.senha);
     } catch (error) {
-      setToastMessage('Erro ao cadastrar usuário. Tente novamente.');
+      setToastMessage('Erro ao atualizar usuário. Tente novamente.');
       setToastVariant('danger');
       setShowToast(true);
     }
   };
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -98,12 +134,11 @@ const FormsUser = ({ onCadastroSuccess }) => {
   };
 
   const nextStep = () => {
-    // Validação da escolha do perfil na primeira etapa
     if (step === 1 && !perfil) {
       alert('Por favor, selecione um perfil antes de avançar.');
       return;
     }
-    if (step < 3) setStep(step + 1);
+    if (step < 2) setStep(step + 1);
   };
 
   const prevStep = () => {
@@ -113,7 +148,7 @@ const FormsUser = ({ onCadastroSuccess }) => {
   const validateStep = (step) => {
     switch (step) {
       case 1:
-        return perfil !== ''; // Deve escolher um perfil
+        return perfil !== '';
       case 2:
         if (perfil === 'cliente') {
           return formData.nome && formData.telefone && formData.senha && formData.email;
@@ -129,40 +164,20 @@ const FormsUser = ({ onCadastroSuccess }) => {
   };
 
   const getStepClass = (currentStep) => {
-    if (step === currentStep) return 'style-ativo'; // Etapa atual
-    if (step > currentStep) { // Já passou da etapa
+    if (step === currentStep) return 'style-ativo';
+    if (step > currentStep) {
       return validateStep(currentStep) ? 'style-sucesso' : 'style-erro';
     }
-    return ''; // Futuras etapas
+    return '';
   };
 
   const renderStepContent = () => {
     switch (step) {
       case 1:
         return (
-          <div className="containerPerfil">
-            <button
-              className={`buttonsPerfil buttonsCliente ${perfil === 'cliente' ? 'active' : ''}`}
-              onClick={() => setPerfil('cliente')}
-            >
-              <img src="/images/IconUser.svg" width={18} height={18} alt="" />
-              Sou Cliente
-            </button>
-            <button
-              className={`buttonsPerfil buttonsRestaurante ${perfil === 'restaurante' ? 'active' : ''}`}
-              onClick={() => setPerfil('restaurante')}
-            >
-              <img src="/images/IconRestaurante.svg" width={18} height={18} alt="" />
-              Quero vender
-            </button>
-          </div>
-        );
-      case 2:
-        return (
           <div>
             {perfil === 'cliente' ? (
               <>
-                {/* Formulário para Cliente */}
                 <Row className="mb-2 mt-3 justify-content-center">
                   <Col xs={10}>
                     <LabelComponent>Nome</LabelComponent>
@@ -214,7 +229,6 @@ const FormsUser = ({ onCadastroSuccess }) => {
               </>
             ) : (
               <>
-                {/* Formulário para restaurante */}
                 <Row className="mb-2 mt-3 justify-content-center">
                   <Col xs={10}>
                     <LabelComponent>Nome do Restaurante</LabelComponent>
@@ -267,7 +281,7 @@ const FormsUser = ({ onCadastroSuccess }) => {
             )}
           </div>
         );
-      case 3:
+      case 2:
         return (
           <div>
             <Row className="mb-2 mt-3 justify-content-center">
@@ -293,7 +307,6 @@ const FormsUser = ({ onCadastroSuccess }) => {
               </Col>
             </Row>
 
-
             <Row className="mb-2 justify-content-center">
               <Col xs={7}>
                 <LabelComponent>Rua:</LabelComponent>
@@ -317,7 +330,6 @@ const FormsUser = ({ onCadastroSuccess }) => {
               </Col>
             </Row>
 
-
             <Row className="mb-4 justify-content-center">
               <Col xs={10}>
                 <LabelComponent>Complemento:</LabelComponent>
@@ -339,27 +351,19 @@ const FormsUser = ({ onCadastroSuccess }) => {
   };
 
   return (
-    <div className={styles.FormsUser}>
+    <div className={styles.FormEdit}>
       <div className="containerEtapas">
         <div className="BoxEtapas">
           <span className={`Numeroetapa ${getStepClass(1)}`}>1</span>
-          <span className="labelEtapa">Escolha seu Perfil</span>
+          <span className="labelEtapa">Dados pessoais</span>
         </div>
         <div className={`BarraProgresso ${getStepClass(1)}`}></div>
 
         <div className="BoxEtapas">
           <span className={`Numeroetapa ${getStepClass(2)}`}>2</span>
-          <span className="labelEtapa">Dados pessoais</span>
-        </div>
-        <div className={`BarraProgresso ${getStepClass(2)}`}></div>
-
-        <div className="BoxEtapas">
-          <span className={`Numeroetapa ${getStepClass(3)}`}>3</span>
           <span className="labelEtapa">Endereço</span>
         </div>
       </div>
-
-
 
       {renderStepContent()}
 
@@ -374,19 +378,10 @@ const FormsUser = ({ onCadastroSuccess }) => {
         {step === 2 && (
           <>
             <BtnBack onClick={prevStep} />
-            <BtnProx onClick={nextStep} />
-          </>
-        )}
-
-        {step === 3 && (
-          <>
-            <BtnBack onClick={prevStep} />
             <BtnConfirm onClick={handleSubmit} />
           </>
         )}
       </div>
-
-
 
       <ToastContainer position="top-end" className="p-3">
         <Toast
@@ -408,4 +403,4 @@ const FormsUser = ({ onCadastroSuccess }) => {
   );
 };
 
-export default FormsUser;
+export default FormEdit;

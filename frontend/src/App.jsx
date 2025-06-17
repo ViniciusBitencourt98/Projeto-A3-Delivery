@@ -3,8 +3,11 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { UserProvider, useUser } from './context/UserContext';
 import ClienteHome from './pages/cliente/ClienteHome';
 import ClientePedidos from './pages/cliente/ClientePedidos';
+import ClientePerfil from './pages/cliente/ClientePerfil';
 import RestauranteHome from './pages/restaurante/RestauranteHome';
 import RestauranteCardapio from './pages/restaurante/RestauranteCardapio';
+import RestaurantePerfil from './pages/restaurante/RestaurantePerfil';
+
 
 import PaginaLogin from './pages/PaginaLogin/PaginaLogin';
 import Sidebar from './components/sidebar/Sidebar';
@@ -34,6 +37,7 @@ const AppContent = () => {
               <>
                 <Route path="/cliente" element={<ClienteHome />} />
                 <Route path="/cliente/pedidos" element={<ClientePedidos />} />
+                <Route path="/cliente/perfil" element={<ClientePerfil />} />
                 <Route path="*" element={<Navigate to="/cliente" replace />} />
               </>
             )}
@@ -42,6 +46,7 @@ const AppContent = () => {
               <>
                 <Route path="/restaurante" element={<RestauranteHome />} />
                 <Route path="/restaurante/cardapio" element={<RestauranteCardapio />} />
+                <Route path="/restaurante/perfil" element={<RestaurantePerfil />} />
                 <Route path="*" element={<Navigate to="/restaurante" replace />} />
               </>
             )}

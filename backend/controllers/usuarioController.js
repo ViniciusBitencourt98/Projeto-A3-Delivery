@@ -122,9 +122,9 @@ const UsuariosController = {
                             if (!perfilData) return cb(null);
 
                             if (tipo_perfil === 'cliente') {
-                                UsuarioModel.atualizarCliente(perfilData.id, perfilData, cb);
+                                UsuarioModel.atualizarCliente(id, perfilData, cb);
                             } else if (tipo_perfil === 'restaurante') {
-                                UsuarioModel.atualizarRestaurante(perfilData.id, perfilData, cb);
+                                UsuarioModel.atualizarRestaurante(id, perfilData, cb);
                             } else {
                                 cb(new Error('Tipo de perfil inválido'));
                             }

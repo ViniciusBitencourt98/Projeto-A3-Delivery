@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Nav, Image } from 'react-bootstrap';
 import { BsBoxArrowRight } from 'react-icons/bs';
 import './Sidebar.css';
 
 export default function Sidebar({ perfil }) {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
+  const navigate = useNavigate();
 
   const optionsCliente = [
     { label: 'Home', icon: 'iconhome.svg', url: '/cliente' },
-    { label: 'Perfil', icon: 'iconperfil.svg', url: '/cliente' },
+    { label: 'Perfil', icon: 'iconperfil.svg', url: '/cliente/perfil' },
     { label: 'Pedidos', icon: 'Iconpedidos.svg', url: '/cliente/pedidos' },
   ];
 
   const optionsRestaurante = [
     { label: 'Home', icon: 'iconhome.svg', url: '/restaurante' },
-    { label: 'Perfil', icon: 'iconperfil.svg', url: '/restaurante' },
+    { label: 'Perfil', icon: 'iconperfil.svg', url: '/restaurante/perfil' },
     { label: 'Cardápio', icon: 'Iconcardapio.svg', url: '/restaurante/cardapio' },
   ];
 
@@ -52,7 +53,7 @@ export default function Sidebar({ perfil }) {
           {options.map((opt) => (
             <Link
               key={opt.label}
-              to={opt.url} 
+              to={opt.url}
               className="LabelNavbar d-flex align-items-center mb-4 text-white text-decoration-none"
             >
               <img src={`/images/${opt.icon}`} width={25} height={25} alt="" />
@@ -65,9 +66,13 @@ export default function Sidebar({ perfil }) {
       {/* Rodapé: Sair */}
       <div>
         <Nav.Link
-          href="#"
+          to="/"
           className="LabelNavbar d-flex align-items-center mb-2"
-          onClick={() => alert('Sair clicado')} // aqui você coloca a função real de logout
+          onClick={() => {
+            localStorage.removeItem('user');
+            window.location.href = '/';
+          }
+          }
         >
           <img src="/images/IconSair.svg" width={25} height={25} alt="" />
           {!collapsed && <span className="LabelNavbar" style={{ color: 'var(--alerta)!important' }}>Sair</span>}

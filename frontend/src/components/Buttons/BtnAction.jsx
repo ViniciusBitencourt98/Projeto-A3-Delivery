@@ -1,8 +1,10 @@
 import './Buttons.css';
 
-export const BtnAction = ({onClick, label}) => {
+export const BtnAction = ({onClick, label, ...props}) => {
+  
+
   return (
-    <button onClick={onClick} className='btnAction'>{label}</button>
+    <button onClick={onClick} className='btnAction' {...props}>{label}</button>
   );
 };
 

@@ -76,7 +76,7 @@ const UsuarioModel = {
         const sql = `UPDATE clientes 
                      SET nome = COALESCE(?, nome),
                          telefone = COALESCE(?, telefone)
-                     WHERE id = ?`;
+                     WHERE usuario_id = ?`;
         db.run(sql, [nome, telefone, clienteId], function (err) {
             callback(err, this?.changes);
         });

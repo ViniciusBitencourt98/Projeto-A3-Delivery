@@ -32,6 +32,7 @@ export default function LoginPage({ onLogin }) {
             });
 
             if (!response.ok) {
+                alert('Usuário ou senha inválidos. Por favor, tente novamente.');
                 throw new Error('Erro ao fazer login');
             }
 
@@ -41,7 +42,7 @@ export default function LoginPage({ onLogin }) {
                 email: data.usuario.email,
                 token: data.token,
                 id: data.usuario.id,
-                Nome: data.row.nome
+                Nome: data.row.nome || data.row.nome_fantasia
             });
 
             if (data.tipo_perfil === 'cliente') {

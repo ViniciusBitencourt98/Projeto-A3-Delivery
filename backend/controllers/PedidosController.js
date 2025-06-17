@@ -41,10 +41,12 @@ const PedidosController = {
         const { filtroCampo } = req.body;
         const filtroValor = req.params.id;
 
-        const camposPermitidos = ['usuario_id', 'restaurante_id'];
+        const camposPermitidos = ['usuario_id', 'pedidos.restaurante_id'];
         if (!camposPermitidos.includes(filtroCampo)) {
             return res.status(400).json({ error: 'Campo de filtro inválido.' });
         }
+
+        // filtroCampo = .'pedidos';
 
         PedidosModel.ListarPedidosPorFiltro(filtroCampo, filtroValor, (err, pedidos) => {
             if (err) {

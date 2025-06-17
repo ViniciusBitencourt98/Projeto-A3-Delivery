@@ -20,7 +20,7 @@ const ClienteHome = () => {
 
         setProdutos(data);
 
-        // Gera lista de categorias únicas a partir dos produtos
+        
         const categoriasUnicas = ['Ofertas', ...new Set(data.map(item => item.categoria_nome))];
         setCategorias(categoriasUnicas);
       } catch (err) {
@@ -74,7 +74,7 @@ const ClienteHome = () => {
               ) : (
                 <div className="no-image">Sem imagem</div>
               )}
-              <button className="add-btn">➕</button>
+              <button className="add-btn"><img src="/images/addbtn.svg" alt="" width={30} height={30} /></button>
             </div>
           </div>
         ))}

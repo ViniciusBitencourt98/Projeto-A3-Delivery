@@ -6,7 +6,7 @@ import AvaliacaoComponent from '../Avaliacao/Avaliacao';
 export const CardsComponente = ({ pedido, onClick }) => {
   const { user } = useUser();
 
-  // transforma string concatenada em array
+  
   const itensArray = pedido.itens_nome ? pedido.itens_nome.split(', ') : [];
 
   return (
@@ -30,7 +30,7 @@ export const CardsComponente = ({ pedido, onClick }) => {
         ))}
       </div>
 
-      
+
       <div className='ContainerAction'>
         {user.perfil === 'cliente' ? (
           pedido.status === 'Entregue' ? (
@@ -40,15 +40,31 @@ export const CardsComponente = ({ pedido, onClick }) => {
             />
           ) : (
             <span
-              className={`TagStatus ${pedido.status === 'pendente' ? 'TagPendente' : 'TagOutro'}`}
+              className={`TagStatus ${pedido.status === 'pendente' ? 'TagPendente' : 'TagOutro'
+                }`}
             >
               {pedido.status}
             </span>
           )
         ) : (
-          <BtnAction onClick={() => onClick(pedido.pedido_id)} />
+          pedido.status === 'pendente' ? (
+            <BtnAction
+              label="Entregar"
+              onClick={() => onClick(pedido.pedido_id)}
+            />
+          ) : (
+            <BtnAction
+              label="Entregue"
+              style={{
+                background: 'var(--secundaria)',
+                color: 'var(--texto-primario)'
+              }}
+              onClick={() => onClick(pedido.pedido_id)}
+            />
+          )
         )}
       </div>
+
 
     </div>
   );

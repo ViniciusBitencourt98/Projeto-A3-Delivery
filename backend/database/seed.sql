@@ -24,13 +24,13 @@ INSERT INTO categorias_produto (nome) VALUES
 
 -- Produtos de exemplo
 INSERT INTO produtos (restaurante_id, categoria_id, nome, descricao, preco, foto_url) VALUES
-(1, 1, 'Hamburguer A', 'Delicioso hamburguer A', 20.50, 'hamburguerA.jpg'),
-(1, 2, 'Pizza A', 'Saborosa pizza A', 35.00, 'pizzaA.jpg'),
-(1, 3, 'Suco A', 'Suco natural A', 8.00, 'sucoA.jpg'),
-(2, 1, 'Hamburguer B', 'Delicioso hamburguer B', 21.00, 'hamburguerB.jpg'),
-(2, 2, 'Pizza B', 'Saborosa pizza B', 36.00, 'pizzaB.jpg'),
-(2, 3, 'Suco B', 'Suco natural B', 9.00, 'sucoB.jpg'),
-(3, 1, 'Hamburguer C', 'Delicioso hamburguer C', 22.00, 'hamburguerC.jpg'),
-(3, 2, 'Pizza C', 'Saborosa pizza C', 37.00, 'pizzaC.jpg'),
-(3, 3, 'Suco C', 'Suco natural C', 10.00, 'sucoC.jpg'),
-(3, 4, 'Batata C', 'Batata frita crocante C', 12.00, 'batataC.jpg');
+(1, 1, 'Hamburguer A', 'Delicioso hamburguer A', 20.50, 'hamburguer.png'),
+(1, 2, 'Pizza A', 'Saborosa pizza A', 35.00, 'pizza.png'),
+(1, 3, 'Suco A', 'Suco natural A', 8.00, 'suco.png'),
+(2, 1, 'Hamburguer B', 'Delicioso hamburguer B', 21.00, 'hamburguer.png'),
+(2, 2, 'Pizza B', 'Saborosa pizza B', 36.00, 'pizza.png'),
+(2, 3, 'Suco B', 'Suco natural B', 9.00, 'suco.png'),
+(3, 1, 'Hamburguer C', 'Delicioso hamburguer C', 22.00, 'hamburguer.png'),
+(3, 2, 'Pizza C', 'Saborosa pizza C', 37.00, 'pizza.png'),
+(3, 3, 'Suco C', 'Suco natural C', 10.00, 'suco.png'),
+(3, 4, 'Batata C', 'Batata frita crocante C', 12.00, 'batata.png');
