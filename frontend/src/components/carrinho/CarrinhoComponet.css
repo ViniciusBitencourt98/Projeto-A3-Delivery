@@ -1,0 +1,7 @@
+.cart-container {
+  max-width: 300px;
+}
+
+.cart-container small {
+  color: #666;
+}

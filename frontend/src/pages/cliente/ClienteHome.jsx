@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useUser } from '../../context/UserContext';
 import HeaderComponent from '../../components/Header/Header';
 import './ClienteHome.css';
+import { useCart } from '../../context/CartContext';
 
 const ClienteHome = () => {
   const { user } = useUser();
@@ -10,6 +11,7 @@ const ClienteHome = () => {
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState(null);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState('Ofertas');
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const buscarProdutos = async () => {
@@ -20,7 +22,7 @@ const ClienteHome = () => {
 
         setProdutos(data);
 
-        
+
         const categoriasUnicas = ['Ofertas', ...new Set(data.map(item => item.categoria_nome))];
         setCategorias(categoriasUnicas);
       } catch (err) {
@@ -74,7 +76,17 @@ const ClienteHome = () => {
               ) : (
                 <div className="no-image">Sem imagem</div>
               )}
-              <button className="add-btn"><img src="/images/addbtn.svg" alt="" width={30} height={30} /></button>
+              <button
+                className="add-btn"
+                onClick={() => addToCart({
+                  id: produto.id,
+                  name: produto.nome,
+                  price: produto.preco,
+                  details: produto.descricao
+                })}
+              >
+                <img src="/images/addbtn.svg" alt="" width={30} height={30} />
+              </button>
             </div>
           </div>
         ))}
